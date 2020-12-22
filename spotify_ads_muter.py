@@ -2,17 +2,17 @@ import math
 import time
 
 import pync
-from wasp_spotify_bindings.core import Wasp, WaspException
+from wasp_spotify_bindings.core import Wasp
 
 
 def check_for_ads(spotify: Wasp):
     try:
         track = spotify.get_track()
         state = spotify.get_state()
-    except WaspException:
-        # spotify is not running
-        time.sleep(10)
-        return
+    except Exception:
+        # spotify was closed
+        print('spotify was closed')
+        exit()
 
     duration_sec = track['duration'] / 1000
 
@@ -37,6 +37,7 @@ def check_for_ads(spotify: Wasp):
 
 if __name__ == '__main__':
     spotify = Wasp()
+    spotify.start_spotify()
 
     while True:
         check_for_ads(spotify)
