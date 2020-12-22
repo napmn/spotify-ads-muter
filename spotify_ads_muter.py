@@ -13,8 +13,6 @@ def check_for_ads(spotify: Wasp):
         # spotify was closed
         exit()
 
-    print(track, state)
-
     if state['state'] != 'playing':
         time.sleep(5)
         return
