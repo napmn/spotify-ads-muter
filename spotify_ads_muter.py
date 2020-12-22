@@ -22,7 +22,7 @@ def check_for_ads(spotify: Wasp):
     if duration_sec < 40 and track['popularity'] == 0:
         # this check handles also video ads
         previous_volume = state['volume']
-        mute_duration = math.floor(duration_sec - state['position']) - 0.5
+        mute_duration = math.floor(duration_sec - state['position']) + 0.5
         if mute_duration > 0:
             # weird bug occured that sometimes duration was negative
             pync.notify(
